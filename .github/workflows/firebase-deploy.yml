@@ -3,7 +3,7 @@ name: Deploy to Firebase Hosting
 on:
   push:
     branches:
-      - main  # or master if your branch name differs
+      - main
 
 jobs:
   build_and_deploy:
@@ -11,12 +11,12 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
 
-      - name: Set up Node
-        uses: actions/setup-node@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
         with:
-          node-version: 18
+          node-version: "18"
 
       - name: Install dependencies
         run: npm install
@@ -24,10 +24,10 @@ jobs:
       - name: Build project
         run: npm run build
 
-      - name: Deploy to Firebase
+      - name: Deploy to Firebase Hosting
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: "${{ secrets.GITHUB_TOKEN }}"
-          firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT_NEIGHBOURHOOD_HELP_A6F42 }}"
+          firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT }}"
           channelId: live
-          projectId: neighbourhood-help-a6f42
+          projectId: nextdoor-a6f42
